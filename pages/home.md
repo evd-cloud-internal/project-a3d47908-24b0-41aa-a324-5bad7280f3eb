@@ -87,28 +87,26 @@ ORDER BY order_date
   /%}
 {% /map %}
 
-## Monthly Sales by Segment
+{% row %}
+  {% area_chart
+      data="orders"
+      x="order_date"
+      y="sum(Sales)"
+      series="Segment"
+      date_grain="month"
+      y_fmt="usd0"
+      title="Sales by Segment"
+      subtitle="Monthly sales broken down by customer segment"
+  /%}
 
-{% area_chart
-    data="orders"
-    x="order_date"
-    y="sum(Sales)"
-    series="Segment"
-    date_grain="month"
-    y_fmt="usd0"
-    title="Sales by Segment"
-    subtitle="Monthly sales broken down by customer segment"
-/%}
-
-## Monthly Sales by Product Category
-
-{% area_chart
-    data="orders"
-    x="order_date"
-    y="sum(Sales)"
-    series="Category"
-    date_grain="month"
-    y_fmt="usd0"
-    title="Sales by Category"
-    subtitle="Monthly sales broken down by product category"
-/%}
+  {% area_chart
+      data="orders"
+      x="order_date"
+      y="sum(Sales)"
+      series="Category"
+      date_grain="month"
+      y_fmt="usd0"
+      title="Sales by Category"
+      subtitle="Monthly sales broken down by product category"
+  /%}
+{% /row %}
