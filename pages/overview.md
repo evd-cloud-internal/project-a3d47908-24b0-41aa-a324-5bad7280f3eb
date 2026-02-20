@@ -6,16 +6,6 @@ type: page
 
 # Superstore Executive Overview
 
-```sql orders
-SELECT
-  *,
-  toDate(toInt32(toFloat64(extractAll(assumeNotNull("Order Date"), 'value: ([0-9.]+)')[1])) - 25569) as order_date,
-  toDate(toInt32(toFloat64(extractAll(assumeNotNull("Ship Date"), 'value: ([0-9.]+)')[1])) - 25569) as ship_date,
-  "State/Province" as state
-FROM sample_superstore_orders_qbzztc
-ORDER BY order_date
-```
-
 {% big_value
   data="orders"
   value="sum(Sales)"
@@ -87,26 +77,3 @@ ORDER BY order_date
   /%}
 {% /map %}
 
-{% row %}
-  {% area_chart
-      data="orders"
-      x="order_date"
-      y="sum(Sales)"
-      series="Segment"
-      date_grain="month"
-      y_fmt="usd0"
-      title="Sales by Segment"
-      subtitle="Monthly sales broken down by customer segment"
-  /%}
-
-  {% area_chart
-      data="orders"
-      x="order_date"
-      y="sum(Sales)"
-      series="Category"
-      date_grain="month"
-      y_fmt="usd0"
-      title="Sales by Category"
-      subtitle="Monthly sales broken down by product category"
-  /%}
-{% /row %}
