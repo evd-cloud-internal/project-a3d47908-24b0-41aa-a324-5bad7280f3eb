@@ -166,11 +166,11 @@ ORDER BY order_date
     limit=20
     order="sum(Sales) desc"
 %}
-    {% dimension value="Customer Name" /%}
+    {% dimension value="\"Customer Name\"" /%}
     {% measure value="sum(Sales)" fmt="usd0" /%}
     {% measure value="sum(Profit)" fmt="usd0" /%}
     {% measure value="sum(Profit) / sum(Sales) as profit_ratio" fmt="pct1" viz="color" /%}
-    {% measure value="count_distinct(Order ID)" title="Orders" /%}
+    {% measure value="count(distinct \"Order ID\")" title="Orders" /%}
 {% /table %}
 
 ## Regional Performance
@@ -184,7 +184,7 @@ ORDER BY order_date
     {% measure value="sum(Sales)" fmt="usd0" viz="bar" /%}
     {% measure value="sum(Profit)" fmt="usd0" /%}
     {% measure value="sum(Profit) / sum(Sales) as profit_ratio" fmt="pct1" viz="color" /%}
-    {% measure value="count_distinct(\"Customer Name\")" title="Customers" /%}
-    {% measure value="count_distinct(\"Order ID\")" title="Orders" /%}
+    {% measure value="count(distinct \"Customer Name\")" title="Customers" /%}
+    {% measure value="count(distinct \"Order ID\"")" title="Orders" /%}
     {% measure value="sum(Quantity)" title="Quantity" /%}
 {% /table %}
