@@ -21,7 +21,6 @@ ORDER BY order_date
   value="sum(Sales)"
   fmt="usd0"
   title="Total Sales"
-  width=14
 /%}
 
 {% big_value
@@ -29,7 +28,6 @@ ORDER BY order_date
   value="sum(Profit)"
   fmt="usd0"
   title="Total Profit"
-  width=14
 /%}
 
 {% big_value
@@ -37,7 +35,6 @@ ORDER BY order_date
   value="sum(Profit) / sum(Sales)"
   fmt="pct1"
   title="Profit Ratio"
-  width=14
 /%}
 
 {% big_value
@@ -45,7 +42,6 @@ ORDER BY order_date
   value="sum(Profit) / count(distinct \"Order ID\")"
   fmt="usd2"
   title="Profit per Order"
-  width=14
 /%}
 
 {% big_value
@@ -53,7 +49,6 @@ ORDER BY order_date
   value="sum(Sales) / count(distinct \"Customer Name\")"
   fmt="usd0"
   title="Sales per Customer"
-  width=14
 /%}
 
 {% big_value
@@ -61,7 +56,6 @@ ORDER BY order_date
   value="avg(Discount)"
   fmt="pct1"
   title="Avg Discount"
-  width=14
 /%}
 
 {% big_value
@@ -69,7 +63,6 @@ ORDER BY order_date
   value="sum(Quantity)"
   fmt="#,##0"
   title="Total Quantity"
-  width=14
 /%}
 
 ## Sales by Geography
@@ -112,79 +105,3 @@ ORDER BY order_date
     title="Sales by Category"
     subtitle="Monthly sales broken down by product category"
 /%}
-
-## Profitability by Sub-Category
-
-{% horizontal_bar_chart
-    data="orders"
-    y="Sub-Category"
-    x="sum(Profit)"
-    x_fmt="usd0"
-    title="Profit by Sub-Category"
-    subtitle="Which product sub-categories are most and least profitable"
-    order="sum(Profit) desc"
-    series="case when sum(Profit) >= 0 then 'Profitable' else 'Unprofitable' end"
-    chart_options={
-        series_colors={
-            "Profitable"="#1c688d"
-            "Unprofitable"="#c84a22"
-        }
-    }
-/%}
-
-## Sales by Category and Month
-
-{% heatmap
-    data="orders"
-    x="order_date"
-    x_date_grain="month of year"
-    y="Category"
-    value="sum(Sales)"
-    value_fmt="usd0"
-    title="Sales Heatmap"
-    subtitle="Monthly sales intensity by product category"
-/%}
-
-## Customer Analysis
-
-{% scatter_chart
-    data="orders"
-    x="sum(Sales)"
-    y="sum(Profit)"
-    point_title="Customer Name"
-    x_fmt="usd0"
-    y_fmt="usd0"
-    title="Sales vs Profit by Customer"
-    subtitle="Each point represents a customer"
-/%}
-
-## Top Customers
-
-{% table
-    data="orders"
-    title="Customer Ranking by Sales"
-    limit=20
-    order="sum(Sales) desc"
-%}
-    {% dimension value="\"Customer Name\"" /%}
-    {% measure value="sum(Sales)" fmt="usd0" /%}
-    {% measure value="sum(Profit)" fmt="usd0" /%}
-    {% measure value="sum(Profit) / sum(Sales) as profit_ratio" fmt="pct1" viz="color" /%}
-    {% measure value="count(distinct \"Order ID\")" title="Orders" /%}
-{% /table %}
-
-## Regional Performance
-
-{% table
-    data="orders"
-    title="Performance by Region"
-    order="sum(Sales) desc"
-%}
-    {% dimension value="Region" /%}
-    {% measure value="sum(Sales)" fmt="usd0" viz="bar" /%}
-    {% measure value="sum(Profit)" fmt="usd0" /%}
-    {% measure value="sum(Profit) / sum(Sales) as profit_ratio" fmt="pct1" viz="color" /%}
-    {% measure value="count(distinct \"Customer Name\")" title="Customers" /%}
-    {% measure value="count(distinct \"Order ID\"")" title="Orders" /%}
-    {% measure value="sum(Quantity)" title="Quantity" /%}
-{% /table %}
