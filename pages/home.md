@@ -68,7 +68,7 @@ ORDER BY order_date
   data="orders"
   value="sum(Quantity)"
   fmt="num0"
-  title="Total Quantity"
+  title="Quantity"
   width=11
 /%}
 
