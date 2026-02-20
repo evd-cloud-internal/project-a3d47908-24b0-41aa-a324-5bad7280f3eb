@@ -77,5 +77,7 @@ type: page
   /%}
 {% /map %}
 
-/pa
+{% partial
+  file="segments"
+/%}
 
