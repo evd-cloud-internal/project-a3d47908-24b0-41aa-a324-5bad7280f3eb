@@ -1,5 +1,5 @@
 ---
-name: newpartial
+name: segments
 assetId: 005d8b42-2229-4537-8708-b5ba06bc6200
 type: partial
 ---
