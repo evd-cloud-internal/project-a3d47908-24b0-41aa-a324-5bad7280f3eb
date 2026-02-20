@@ -21,6 +21,7 @@ ORDER BY order_date
   value="sum(Sales)"
   fmt="usd0"
   title="Total Sales"
+  width=11
 /%}
 
 {% big_value
@@ -28,6 +29,7 @@ ORDER BY order_date
   value="sum(Profit)"
   fmt="usd0"
   title="Total Profit"
+  width=11
 /%}
 
 {% big_value
@@ -35,6 +37,7 @@ ORDER BY order_date
   value="sum(Profit) / sum(Sales)"
   fmt="pct1"
   title="Profit Ratio"
+  width=11
 /%}
 
 {% big_value
@@ -42,6 +45,7 @@ ORDER BY order_date
   value="sum(Profit) / count(distinct \"Order ID\")"
   fmt="usd2"
   title="Profit per Order"
+  width=11
 /%}
 
 {% big_value
@@ -49,6 +53,7 @@ ORDER BY order_date
   value="sum(Sales) / count(distinct \"Customer Name\")"
   fmt="usd0"
   title="Sales per Customer"
+  width=11
 /%}
 
 {% big_value
@@ -56,13 +61,15 @@ ORDER BY order_date
   value="avg(Discount)"
   fmt="pct1"
   title="Avg Discount"
+  width=11
 /%}
 
 {% big_value
   data="orders"
   value="sum(Quantity)"
-  fmt="#,##0"
+  fmt="num0"
   title="Total Quantity"
+  width=11
 /%}
 
 ## Sales by Geography
